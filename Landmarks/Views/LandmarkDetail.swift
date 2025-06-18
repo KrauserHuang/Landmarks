@@ -8,40 +8,43 @@
 import SwiftUI
 
 struct LandmarkDetail: View {
+    
+    var landmark: Landmark
+    
     var body: some View {
-        VStack {
-            MapView()
+        ScrollView {
+            MapView(coordinate: landmark.locationCoordinate)
                 .frame(height: 300) // 可以自定義view的frame
             
-            CircleImage()
+            CircleImage(image: landmark.image)
                 .offset(y: -130)        // 往上偏移130
                 .padding(.bottom, -130) // 與bottom的間隙減少130
             
             VStack(alignment: .leading) {
-                Text("Turtle Rock")
+                Text(landmark.name)
                     .font(.title)
                 
                 HStack {
-                    Text("Joshua Tree National Park")
+                    Text(landmark.park)
                     Spacer()
-                    Text("California")
+                    Text(landmark.state)
                 }
                 .font(.subheadline)             // 將modifier放在Stack上會適用於裡面的所有畫面
                 .foregroundStyle(.secondary)
                 
                 Divider()
                 
-                Text("About Turtle Rock")
+                Text("About \(landmark.name)")
                     .font(.title2)
-                Text("Descriptive text goes here.")
+                Text(landmark.description)
             }
             .padding()
-            
-            Spacer()
         }
+        .navigationTitle(landmark.name)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 #Preview {
-    LandmarkDetail()
+    LandmarkDetail(landmark: landmarks[0])
 }

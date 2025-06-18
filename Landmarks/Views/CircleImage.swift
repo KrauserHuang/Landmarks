@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct CircleImage: View {
+    
+    var image: Image
+    
     var body: some View {
-        Image(.turtlerock)
+        image
             .clipShape(Circle())    // Circle()在這裡當做一個遮罩(mask)
             .overlay {
                 Circle().stroke(.white, lineWidth: 4)    // overlay一個Circle()並且是以stroke形式
@@ -19,5 +22,5 @@ struct CircleImage: View {
 }
 
 #Preview {
-    CircleImage()
+    CircleImage(image: Image(.turtlerock))
 }
