@@ -9,10 +9,12 @@ import SwiftUI
 
 struct LandmarkList: View {
     
+    @Environment(\.modelData) var modelData     // create custom keypath
+//    @Environment(ModelData.self) var modelData
     @State private var showFavoritesOnly: Bool = false
     
     var filteredLandmarks: [Landmark] {
-        landmarks.filter { landmark in
+        modelData.landmarks.filter { landmark in
             (!showFavoritesOnly || landmark.isFavorite)
         }
     }
@@ -42,4 +44,5 @@ struct LandmarkList: View {
 
 #Preview {
     LandmarkList()
+        .environment(ModelData())
 }
