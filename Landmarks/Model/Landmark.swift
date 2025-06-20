@@ -11,7 +11,6 @@ import SwiftUI
 
 struct Landmark: Hashable, Codable, Identifiable {
     var name: String
-    var category: String
     var city: String
     var state: String
     var id: Int
@@ -19,6 +18,13 @@ struct Landmark: Hashable, Codable, Identifiable {
     var isFavorite: Bool
     var park: String
     var description: String
+    
+    var category: Category
+    enum Category: String, CaseIterable, Codable {  // 因為 landmarkData.json 在 category 上只會回傳這三個，所以可以用一個 enum 來包裝 category 型別
+        case lakes = "Lakes"
+        case rivers = "Rivers"
+        case mountains = "Mountains"
+    }
     
     private var imageName: String
     var image: Image {
@@ -38,8 +44,6 @@ struct Landmark: Hashable, Codable, Identifiable {
         var longitude: Double
     }
 }
-
-
 
 /*
  "name": "Silver Salmon Creek",
