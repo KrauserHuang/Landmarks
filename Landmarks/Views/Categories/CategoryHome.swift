@@ -14,9 +14,17 @@ struct CategoryHome: View {
     var body: some View {
         NavigationSplitView {   // Menu bar(menu 列表顯示)
             List {
+                modelData.features[0].image
+                    .resizable()
+                    .scaledToFill()
+                    .frame(height: 200)
+                    .clipped()
+                    .listRowInsets(EdgeInsets())    // 移除 list 的預設那邊距
+                
                 ForEach(modelData.categories.keys.sorted(), id: \.self) { key in
-                    Text(key)
+                    CategoryRow(categoryName: key, items: modelData.categories[key]!)
                 }
+                .listRowInsets(EdgeInsets())
             }
                 .navigationTitle("Featured")
         } detail: {             // Detail view for each of the menu item(點擊 menu 列表項目後跳轉的詳細頁)

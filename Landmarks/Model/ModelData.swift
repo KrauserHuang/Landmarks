@@ -14,6 +14,10 @@ class ModelData {
     var landmarks: [Landmark] = load("landmarkData.json")
     var hikes: [Hike] = load("hikeData.json")
     
+    var features: [Landmark] {
+        landmarks.filter { $0.isFeatured }
+    }
+    
     /*
      用來將 array 按照特定條件分組
      $0 代表每個 Landmark 物件，raw 代表取得其 enum 原始值
